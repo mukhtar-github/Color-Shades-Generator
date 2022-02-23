@@ -36,7 +36,16 @@ function App() {
       </form>
     </section>
     <section className='color'>
-      {list.map((color, index))}
+      {list.map((color, index) => {
+        return (
+          <SingleColor
+            key={index}
+            {...color}
+            index={index}
+            hexColor={color.hex}
+          />
+        )
+      })}
     </section>
   </>
   )
