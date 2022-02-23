@@ -3,8 +3,8 @@ import rgbToHex from './utils'
 
 const SingleColor = ({ rgb, weight, index, hexColor }) => {
   const [alert, setAlert] = useState(false);
-  const bcg = rbg.join(',');
-  const hex = rgbToHex(...rbg);
+  const bcg = rgb.join(',');
+  const hex = rgbToHex(...rgb);
   const hexValue = `#${hexColor}`;
 
   useEffect(() => {
@@ -12,9 +12,21 @@ const SingleColor = ({ rgb, weight, index, hexColor }) => {
       setAlert(false);
     }, 3000);
     return () => clearTimeout(timeout);
-  }, [alert])
+  }, [alert]);
 
-  return <h4>single color</h4>
+  return (
+  <article 
+    className={`color ${index > 10 && 'color-light'}`}
+    style={{ backgroundColor: `rgb(${bcg})` }}
+    onClick={() => {
+      setAlert(true)
+      navigator.clipboard.writeText(hexValue)
+    }}
+  >
+    <p className='percent-value'>{weight}%</p>
+    <p></p>
+
+  </article>)
 }
 
-export default SingleColor
+export default SingleColor;
